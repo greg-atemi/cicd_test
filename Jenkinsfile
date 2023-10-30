@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        label 'my-docker'
+        docker {
+            image 'cimg/python:3.11.4'
+        }
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -8,11 +13,6 @@ pipeline {
         }
 
         stage('Build') {
-            agent {
-                docker {
-                    image 'cimg/python:3.11.4'
-                }
-            }
             steps {
                 sh 'mvn clean install'
                 sh 'python3 -m venv venv'
