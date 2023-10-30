@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     stages {
         stage('Checkout') {
             steps {
@@ -10,7 +11,6 @@ pipeline {
             agent {
                 docker {
                     image 'cimg/python:3.11.4'
-                    working_directory '~/repo'
                 }
             }
             steps {
