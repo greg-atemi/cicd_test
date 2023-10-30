@@ -1,5 +1,4 @@
 pipeline {
-    agent none
     stages {
         stage('Checkout') {
             steps {
@@ -8,12 +7,12 @@ pipeline {
         }
 
         stage('Build') {
-            // agent {
-            //     docker {
-            //     image 'cimg/python:3.11.4'
-            //     working_directory '~/repo'
-            //     }
-            // }
+            agent {
+                docker {
+                    image 'cimg/python:3.11.4'
+                    working_directory '~/repo'
+                }
+            }
             steps {
                 sh 'mvn clean install'
                 sh 'python3 -m venv venv'
